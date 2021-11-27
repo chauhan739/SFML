@@ -2,9 +2,9 @@
 In this repo, I am placing that code of those 2D games that I'd developed.
 I had developed these games on a Debian based Linux distro.
 ### Requirements
-[x] g++
-[x] libsfml-dev
-[x] make
+- [x] g++
+- [x] libsfml-dev
+- [x] make
 
 To ensure that you have all these packages already installed, run the below command in terminal
 
