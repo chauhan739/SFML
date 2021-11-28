@@ -1,6 +1,6 @@
 # TIMBER MAN
 <p align = "center">
-	![TimberMan Gameplay](https://i.ibb.co/2dPfW5r/timberman.gif)
+	[![TimberMan Gameplay](https://i.ibb.co/2dPfW5r/timberman.gif)]
 </p>
 
 For installation and requirements, [click here][1]
