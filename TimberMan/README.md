@@ -1,6 +1,6 @@
 # TIMBER MAN
 
-![TimberMan Gameplay](https://i.ibb.co/2dPfW5r/timberman.gif)
+![TimberMan Gameplay](https://github.com/chauhan739/SFML/blob/main/TimberMan/assets/timberman.gif)
 
 For installation and requirements, [click here][1]
 
