@@ -14,13 +14,17 @@ int main(){
   Font font;
   if(!font.loadFromFile("../assets/arial.ttf")) return EXIT_FAILURE;
 
+  FloatRect textRect;
+
   // setting up Title
   Text title("SFML Pong", font, 50);
   title.setOutlineThickness(2.0f);
   title.setOutlineColor(Color::Red);
   title.setFillColor(Color::Green);
   title.setStyle(Text::Italic);
-  title.setPosition((title.getGlobalBounds().width) - title.getGlobalBounds().width/4, (height/2 - 20) - title.getGlobalBounds().height/2);
+  textRect = title.getGlobalBounds();
+  title.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
+  title.setPosition((float)width/2, (float)height/2);
 
   // setting up my name
   Text name("Developed by chauhan739", font, 25);
@@ -28,7 +32,19 @@ int main(){
   name.setOutlineColor(Color::Red);
   name.setFillColor(Color::Green);
   name.setStyle(Text::Italic);
-  name.setPosition((name.getGlobalBounds().width) - 2*name.getGlobalBounds().width/5, (height/2 - 20) + title.getGlobalBounds().height - name.getGlobalBounds().height/2);
+  textRect = name.getGlobalBounds();
+  name.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
+  name.setPosition((float)width/2, (float)height/2 + 50.0f);
+
+  // setting up Game Over
+  Text gameOver("GAME OVER", font, 25);
+  gameOver.setOutlineThickness(1.0f);
+  gameOver.setOutlineColor(Color::Red);
+  gameOver.setFillColor(Color::Green);
+  gameOver.setStyle(Text::Italic);
+  textRect = gameOver.getGlobalBounds();
+  gameOver.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
+  gameOver.setPosition((float)width/2, (float)height/2);
 
   RectangleShape paddleRight, paddleLeft, ball, upperWall, lowerWall, leftWall, rightWall;
 
@@ -45,7 +61,7 @@ int main(){
   // setting up ball
   ball.setSize(Vector2f(10.0f, 10.0f));
   ball.setFillColor(Color::Red);
-  ball.setPosition(width/2, height/2);
+  ball.setPosition((float)width/2, (float)height/2);
   Vector2f ballSpeed(5.0f, 3.0f);
 
   // setting up upperWall
@@ -68,7 +84,7 @@ int main(){
   rightWall.setFillColor(Color::Yellow);
   rightWall.setPosition(width-3, 0.0f);
 
-  enum states{START, PLAYING};
+  enum states{START, PLAYING, END};
   int gameStates = START;
 
   bool leftGoing = false, rightGoing = true, upGoing = false, downGoing = true;
@@ -92,6 +108,8 @@ int main(){
       window.draw(paddleLeft);
       window.draw(paddleRight);
       break;
+    case END:
+      window.draw(gameOver);
     }
     
     window.display();
@@ -161,6 +179,8 @@ int main(){
     }
 
     ball.move(ballSpeed);
+
+    if(ball.getPosition().x < 0.0f) gameStates = END;
   }
 
   return EXIT_SUCCESS;
