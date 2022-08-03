@@ -1,17 +1,8 @@
 # TIMBER MAN
 
-![TimberMan Gameplay](https://github.com/chauhan739/SFML/blob/main/TimberMan/assets/timberman.gif)
+![TimberMan Gameplay](https://github.com/chauhan739/Aryan/blob/master/sfml/TimberMan/Timberman-preview.gif)
 
-For installation and requirements, [click here][1]
+For installation and requirements, [click here](https://github.com/chauhan739/SFML#requirements)
 
 ### Compilation
-For compiling the source code, run the below command in terminal
-
-```bash
-cd ~/SFML/TimberMan/
-make
-```
-
-For deleting the `main.o` file, run `make clean` command in the terminal
-
-[1]: https://github.com/chauhan739/SFML#requirements
+For compiling the source code, run `make` in terminal
