@@ -1,93 +1,76 @@
-#include "SFML/Graphics.hpp"
-#include <time.h>
-using namespace sf;
+#include <SFML/Graphics.hpp>
 
-int N=30,M=20;
-int size=16;
-int w = size*N;
-int h = size*M;
+struct Fruit {
+  int x;
+  int y;
+} fruit;
 
-int dir,num=4;
+struct Snake {
+  int x;
+  int y;
+} snake;
 
-struct Snake 
-{ int x,y;}  s[100];
+int main() {
+  int grid[40][30];
+  for(int i = 0; i < 40; i++) for(int j = 0; j < 30; j++) grid[i][j] = 0;
 
-struct Fruit
-{ int x,y;} f;
+  sf::RenderWindow window(sf::VideoMode(800,600), "Snake Game!", sf::Style::Titlebar|sf::Style::Close);
 
-void Tick()
- {
-    for (int i=num;i>0;--i)
-     {s[i].x=s[i-1].x; s[i].y=s[i-1].y;}
-
-    if (dir==0) s[0].y+=1;      
-    if (dir==1) s[0].x-=1;        
-    if (dir==2) s[0].x+=1;         
-    if (dir==3) s[0].y-=1;   
-
-    if ((s[0].x==f.x) && (s[0].y==f.y)) 
-     {num++; f.x=rand()%N; f.y=rand()%M;}
-
-    if (s[0].x>N) s[0].x=0;  if (s[0].x<0) s[0].x=N;
-    if (s[0].y>M) s[0].y=0;  if (s[0].y<0) s[0].y=M;
- 
-    for (int i=1;i<num;i++)
-     if (s[0].x==s[i].x && s[0].y==s[i].y)  num=i;
- }
-
-int main()
-{  
-    srand(time(0));
-
-    RenderWindow window(VideoMode(w, h), "Snake Game!");
-
-    Texture t1,t2;
-    t1.loadFromFile("images/white.png");
-    t2.loadFromFile("images/red.png");
-
-    Sprite sprite1(t1);
-    Sprite sprite2(t2);
-
-    Clock clock;
-    float timer=0, delay=0.1;
-
-    f.x=10;
-    f.y=10; 
-    
-    while (window.isOpen())
-    {
-        float time = clock.getElapsedTime().asSeconds();
-        clock.restart();
-        timer+=time; 
-
-        Event e;
-        while (window.pollEvent(e))
-        {
-            if (e.type == Event::Closed)      
-                window.close();
-        }
-
-        if (Keyboard::isKeyPressed(Keyboard::Left)) dir=1;   
-        if (Keyboard::isKeyPressed(Keyboard::Right)) dir=2;    
-        if (Keyboard::isKeyPressed(Keyboard::Up)) dir=3;
-        if (Keyboard::isKeyPressed(Keyboard::Down)) dir=0;
-
-        if (timer>delay) {timer=0; Tick();}
-
-   ////// draw  ///////
-    window.clear();
-
-    for (int i=0; i<N; i++) 
-      for (int j=0; j<M; j++) 
-        { sprite1.setPosition(i*size, j*size);  window.draw(sprite1); }
-
-    for (int i=0;i<num;i++)
-        { sprite2.setPosition(s[i].x*size, s[i].y*size);  window.draw(sprite2); }
-   
-    sprite2.setPosition(f.x*size, f.y*size);  window.draw(sprite2);    
-
-    window.display();
+  sf::RectangleShape blocks[40][30];
+  for(int i = 0; i < 40; i++) for(int j = 0; j < 30; j++) {
+      blocks[i][j].setSize(sf::Vector2f(20.0f, 20.0f));
+      blocks[i][j].setPosition(i*20, j*20);
+      blocks[i][j].setOutlineThickness(1.0f);
+      blocks[i][j].setOutlineColor(sf::Color(115, 115, 115));
     }
 
-    return 0;
+  sf::RectangleShape walls[4];
+  // Upper Wall
+  walls[0].setPosition(0.0f, 0.0f);
+  walls[0].setSize(sf::Vector2f(800.0f, 1.0f));
+  walls[0].setFillColor(sf::Color::Red);
+  // Right Wall
+  walls[1].setPosition(799.0f, 0.0f);
+  walls[1].setSize(sf::Vector2f(1.0f, 600.0f));
+  walls[1].setFillColor(sf::Color::Red);
+  // Bottom Wall
+  walls[2].setPosition(0.0f, 599.0f);
+  walls[2].setSize(sf::Vector2f(800.0f, 1.0f));
+  walls[2].setFillColor(sf::Color::Red);
+  // Left Wall
+  walls[3].setPosition(0.0f, 0.0f);
+  walls[3].setSize(sf::Vector2f(1.0f, 600.0f));
+  walls[3].setFillColor(sf::Color::Red);
+
+  srand((int)time(0));
+  fruit.x = rand() % 40;
+  fruit.y = rand() % 30;
+
+  sf::Clock clock;
+  float timer = 0.0f, delay = 0.1f;
+
+  while(window.isOpen()) {
+    float time = clock.getElapsedTime().asSeconds();
+
+    clock.restart();
+    timer += time;
+    
+    sf::Event event;
+
+    while(window.pollEvent(event)) {
+      if(event.key.code == sf::Keyboard::Escape || event.type == sf::Event::Closed) window.close();
+    }
+
+    for(int i = 0; i < 40; i++) for(int j = 0; j <30; j++) {
+	if(i == fruit.x && j == fruit.y) blocks[i][j].setFillColor(sf::Color(0, 204, 0));
+	else blocks[i][j].setFillColor(sf::Color::Black);
+      }
+
+    window.clear(sf::Color::White);
+    for(int i = 0; i < 40; i++) for(int j = 0; j < 30; j++) window.draw(blocks[i][j]);
+    for(int i = 0; i < 4; i++) window.draw(walls[i]);
+    window.display();
+  }
+
+  return EXIT_SUCCESS;
 }
