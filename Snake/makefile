@@ -14,4 +14,4 @@ run:
 	./main
 
 clean:
-	$(RM) *.o *~
+	$(RM) *.o *~ main
