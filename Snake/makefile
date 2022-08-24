@@ -1,17 +1,37 @@
+# Compiler
 CXX = g++
+
+# Compiler Flags
 CXXFLAGS = -Wall -g
-LDLIBS = -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
 
-main: main.o
-	$(CXX) -o main main.o $(LDLIBS)
+# Linking Flags
+LDFLAGS = -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
 
-main.o: main.cpp
-	$(CXX) -c main.cpp
+# Executable File
+BIN = main
+
+# Header File
+HDR = header.h
+
+SRCS := $(wildcard *.cpp)
+
+OBJS := $(SRCS:.cpp=.o)
+
+all: $(BIN) $(OBJS)
+
+$(BIN): $(OBJS)
+	@$(CXX) $(CXXFLAGS) $^ $(LDFLAGS) -o $@
+	@echo Executable file generated successfully
+
+$(OBJS): $(SRCS) $(HDR)
+	@echo Generating Binaries...
+	@$(CXX) -c $(SRCS)
+	@echo Binary files generated successfully
 
 .PHONY: run clean
 
 run:
-	./main
-
+	@echo Running Executable...
+	@./$(BIN)
 clean:
-	$(RM) *.o *~ main
+	$(RM) *.o *~
