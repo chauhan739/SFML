@@ -2,11 +2,17 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 
+/**
+ * Contains coordinates of fruits dispalyed on grid
+ **/
 struct Fruit {
   int x;
   int y;
 };
 
+/**
+ * Contains coordinates of all segments of snake
+ **/
 struct Snake {
   int x;
   int y;
@@ -34,7 +40,7 @@ class GameUtilities {
   GameUtilities();
 
   /**
-   * Funtion calling all other member functions except constructor
+   * Funtion calling all other member functions except constructor.
    * Implementation present in RunAppliction.cpp
    **/
   void start();
@@ -52,7 +58,7 @@ class GameUtilities {
   void handleEvent();
 
   /**
-   * Function for drawing all graphics on the screen
+   * Function for drawing all graphics on the screen.
    * Implementation present in Display.cpp
    **/
   void draw();
