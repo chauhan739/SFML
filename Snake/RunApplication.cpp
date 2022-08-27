@@ -7,6 +7,13 @@ void GameUtilities::start() {
   m_fruit.x = rand() % 40;
   m_fruit.y = rand() % 30;
 
+  Snake head;
+  do {
+    head.x = rand() % 40;
+    head.y = rand() % 30;
+  } while(head.x != m_fruit.x && head.y != m_fruit.y);
+  m_snake.push_back(head);
+
   m_timer = 0.0f;
   m_delay = 0.1f;
 
@@ -21,6 +28,7 @@ void GameUtilities::start() {
     for(int i = 0; i < 40; i++) {
       for(int j = 0; j < 30; j++) {
 	if(i == m_fruit.x && j == m_fruit.y) m_blocks[i][j].setFillColor(sf::Color(0, 204, 0));
+	else if(i == m_snake.at(0).x && j == m_snake.at(0).y) m_blocks[i][j].setFillColor(sf::Color(255, 102, 102));
 	else m_blocks[i][j].setFillColor(sf::Color::Black);
       }
     }
