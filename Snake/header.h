@@ -58,6 +58,12 @@ class GameUtilities {
   void handleEvent();
 
   /**
+   * Function for handling snake movement.
+   * Implementation present in SnakeMovement.cpp
+   **/
+  void move();
+
+  /**
    * Function for drawing all graphics on the screen.
    * Implementation present in Display.cpp
    **/
