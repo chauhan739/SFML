@@ -18,6 +18,20 @@ struct Snake {
   int y;
 };
 
+/**
+ * Contains information about the current direction
+ * in which the snake is going
+ **/
+enum Direction {
+  RIGHT = 1,
+
+  DOWN,
+
+  LEFT,
+
+  UP
+};
+
 class GameUtilities {
  private:
   sf::RenderWindow m_window;
@@ -27,6 +41,8 @@ class GameUtilities {
   Fruit m_fruit;
 
   std::vector<Snake> m_snake;
+
+  Direction m_currDirection;
 
   sf::Font m_font;
 
