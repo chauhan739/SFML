@@ -13,15 +13,19 @@ void GameUtilities::start() {
     head.y = rand() % 30;
   } while(head.x != m_fruit.x && head.y != m_fruit.y);
   m_snake.push_back(head);
-
-  m_timer = 0.0f;
-  m_delay = 0.1f;
+  
+  float timer = 0.0f, delay = 0.2f;
 
   while(m_window.isOpen()) {
     float time = m_clock.getElapsedTime().asSeconds();
 
     m_clock.restart();
-    m_timer += time;
+    timer += time;
+
+    if(timer > delay) {
+      GameUtilities::move();
+      timer = 0.0f;
+    }
 
     GameUtilities::handleEvent();
 

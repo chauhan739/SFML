@@ -47,7 +47,6 @@ class GameUtilities {
   sf::Font m_font;
 
   sf::Clock m_clock;
-  float m_timer, m_delay;
 
  public:
    /**
