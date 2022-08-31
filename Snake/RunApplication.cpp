@@ -3,23 +3,24 @@
 void GameUtilities::start() {
   GameUtilities::generateGrid();
 
-  srand((int)time(0));
-  m_fruit.x = rand() % 40;
-  m_fruit.y = rand() % 30;
+  m_fruit.x = 6;
+  m_fruit.y = 15;
 
-  Snake head;
-  do {
-    head.x = rand() % 40;
-    head.y = rand() % 30;
-  } while(head.x != m_fruit.x && head.y != m_fruit.y);
-  m_snake.push_back(head);
-  
+  Snake segment;
+  segment.x = 6;
+  segment.y = 6;
+  for(int i = 0; i < 4; i++) {
+    m_snake.push_back(segment);
+    segment.y -= 1;
+  }
+
+  sf::Clock clock;
   float timer = 0.0f, delay = 0.2f;
 
   while(m_window.isOpen()) {
-    float time = m_clock.getElapsedTime().asSeconds();
+    float time = clock.getElapsedTime().asSeconds();
 
-    m_clock.restart();
+    clock.restart();
     timer += time;
 
     if(timer > delay) {
@@ -36,7 +37,10 @@ void GameUtilities::start() {
 	else m_blocks[i][j].setFillColor(sf::Color::Black);
       }
     }
-
+    for(int i = 1; i < m_snake.size(); i++) {
+      m_blocks[m_snake.at(i).x][m_snake.at(i).y].setFillColor(sf::Color::White);
+    }
+    
     GameUtilities::draw();
   }
 }
