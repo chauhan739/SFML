@@ -7,8 +7,12 @@ void GameUtilities::handleEvent() {
   }
 
   // Handling snake current movement direction
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) m_currDirection = Direction::LEFT;
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) m_currDirection = Direction::RIGHT;
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) m_currDirection = Direction::UP;
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) m_currDirection = Direction::DOWN;
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && m_currDirection != Direction::RIGHT)
+    m_currDirection = Direction::LEFT;
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && m_currDirection != Direction::LEFT)
+    m_currDirection = Direction::RIGHT;
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && m_currDirection != Direction::DOWN)
+    m_currDirection = Direction::UP;
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && m_currDirection != Direction::UP)
+    m_currDirection = Direction::DOWN;
 }
