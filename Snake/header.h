@@ -46,8 +46,6 @@ class GameUtilities {
 
   sf::Font m_font;
 
-  sf::Clock m_clock;
-
  public:
    /**
     * Constructor. Implementation present in Init.cpp
