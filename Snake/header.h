@@ -46,6 +46,8 @@ class GameUtilities {
 
   sf::Font m_font;
 
+  bool m_playingGame;
+
  public:
    /**
     * Constructor. Implementation present in Init.cpp
