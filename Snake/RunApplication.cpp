@@ -8,7 +8,7 @@ void GameUtilities::start() {
   m_fruit.y = 15;
 
   // Snake head by default starting position
-  Snake segment;
+  Block segment;
   segment.x = 6;
   segment.y = 6;
   m_snake.push_back(segment);
