@@ -12,9 +12,7 @@ void GameUtilities::move() {
   if(m_currDirection == Direction::UP) segment.y--;
 
   if(segment.x == m_fruit.x && segment.y == m_fruit.y) {
-    sf::Sound eatFruit;
-    eatFruit.setBuffer(m_eatBuffer);
-    eatFruit.play();
+    m_eatingFruit.play();
     
     m_fruit.x = rand() % 40;
     m_fruit.y = rand() % 30;
