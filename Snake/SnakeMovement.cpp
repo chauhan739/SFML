@@ -1,10 +1,23 @@
 #include "header.h"
 
 void GameUtilities::move() {
-  // m_snake.at(0) is head of the snake
+  srand((unsigned)time(0));
   
-  if(m_currDirection == Direction::RIGHT) m_snake.at(0).x++;
-  if(m_currDirection == Direction::DOWN) m_snake.at(0).y++;
-  if(m_currDirection == Direction::LEFT) m_snake.at(0).x--;
-  if(m_currDirection == Direction::UP) m_snake.at(0).y--;
+  // m_snake.at(0) is head of the snake
+  Block segment = m_snake.at(0);
+  
+  if(m_currDirection == Direction::RIGHT) segment.x++;
+  if(m_currDirection == Direction::DOWN) segment.y++;
+  if(m_currDirection == Direction::LEFT) segment.x--;
+  if(m_currDirection == Direction::UP) segment.y--;
+
+  if(segment.x == m_fruit.x && segment.y == m_fruit.y) {
+    m_fruit.x = rand() % 40;
+    m_fruit.y = rand() % 30;
+    m_snake.push_front(segment);
+  }
+  else {
+    m_snake.push_front(segment);
+    m_snake.pop_back();
+  }
 }
