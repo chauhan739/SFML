@@ -1,6 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include <vector>
+#include <deque>
 
 /**
  * Contains coordinates of fruits dispalyed on grid
@@ -40,7 +40,7 @@ class GameUtilities {
 
   Fruit m_fruit;
 
-  std::vector<Snake> m_snake;
+  std::deque<Snake> m_snake;
 
   Direction m_currDirection;
 

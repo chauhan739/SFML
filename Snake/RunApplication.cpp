@@ -3,16 +3,15 @@
 void GameUtilities::start() {
   GameUtilities::generateGrid();
 
+  // Fruit by default starting position
   m_fruit.x = 6;
   m_fruit.y = 15;
 
+  // Snake head by default starting position
   Snake segment;
   segment.x = 6;
   segment.y = 6;
-  for(int i = 0; i < 4; i++) {
-    m_snake.push_back(segment);
-    segment.y -= 1;
-  }
+  m_snake.push_back(segment);
 
   sf::Clock clock;
   float timer = 0.0f, delay = 0.2f;
