@@ -6,6 +6,7 @@ GameUtilities::GameUtilities() {
   m_font.loadFromFile("assets/font/TYPEWR__.TTF");
 
   m_eatBuffer.loadFromFile("assets/audio/fruit-crunch.wav");
+  m_eatingFruit.setBuffer(m_eatBuffer);
 
   m_playingGame = false;
 }

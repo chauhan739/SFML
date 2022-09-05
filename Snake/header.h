@@ -40,6 +40,7 @@ class GameUtilities {
   sf::Font m_font;
 
   sf::SoundBuffer m_eatBuffer;
+  sf::Sound m_eatingFruit;
 
   bool m_playingGame;
 
