@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <deque>
 
 /**
@@ -37,6 +38,8 @@ class GameUtilities {
   Direction m_currDirection;
 
   sf::Font m_font;
+
+  sf::SoundBuffer m_eatBuffer;
 
   bool m_playingGame;
 
