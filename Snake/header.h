@@ -3,17 +3,9 @@
 #include <deque>
 
 /**
- * Contains coordinates of fruits dispalyed on grid
+ * Represent individual block of the grid
  **/
-struct Fruit {
-  int x;
-  int y;
-};
-
-/**
- * Contains coordinates of all segments of snake
- **/
-struct Snake {
+struct Block {
   int x;
   int y;
 };
@@ -38,9 +30,9 @@ class GameUtilities {
   
   sf::RectangleShape m_blocks[40][30], m_walls[4];
 
-  Fruit m_fruit;
+  Block m_fruit;
 
-  std::deque<Snake> m_snake;
+  std::deque<Block> m_snake;
 
   Direction m_currDirection;
 
